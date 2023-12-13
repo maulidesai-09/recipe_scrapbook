@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Add New Recipe
+{% endblock %}
+
+
+{% block body %}
+
+    {% include "navbar.html" %}
+
+<form action="/login/{{user.id}}/new_recipe/add_recipe" method="POST">
+
+    <div id="user_id" hidden>{{user.id}}</div>
+    <div id="recipe_id" hidden>new_recipe</div>
+
+    <h1> Add a New Recipe </h1> 
+
+    <div>
+        <h4> Recipe Date </h4>
+        <input type="date" name="recipe_date" id="recipe_date">
+        <h4> Recipe Name </h4>
+        <input type="text" name="recipe_name" id="recipe_name" required>
+    </div>
+
+    <br>
+
+    <div>
+        <h4> Servings </h4>
+        <input type="text" name="servings" id="servings">
+    </div>
+
+    <br>
+
+    <div class="ingredient_details">
+        <h4> Ingredients </h4>
+        <div class="ingredient_individual">
+            Ingredient Name
+            <input type="text" name="ingredient_name" class="ingredient_name">
+            Quantity
+            <input type="text" name="ingredient_quantity" class="ingredient_quantity">
+            Units
+            <select  name="ingredient_unit" class="ingredient_unit">
+                <option value="cup(s)"> cup </option>
+                <option value="grams"> gram </option>
+                <option value="ml"> ml </option>
+                <option value="liter"> liter </option>
+                <option value="oz"> oz </option>
+                <option value="teaspoon"> teaspoon </option>
+                <option value="tablespoon"> tablespoon </option>
+                <option value="number"> number </option>
+            </select>
+
+            <button class="add_ingredient"> Add New </button>
+            </div>
+    </div>
+
+    <br>
+
+    <div class="instruction_details">
+        <h4> Instructions </h4>
+        <div class="instruction_individual">
+        <textarea name="instructions" class="instruction_description" wrap="hard" style="width: 640px; height: 18px;"> </textarea>
+        
+        <button class="add_instruction"> Add New </button>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div>
+        <h4> Notes </h4>
+        <textarea name="notes" id="notes" wrap="hard" style="width: 500px; height: 200px;"> </textarea>
+    </div>
+
+    <br>
+
+    
+    <input type="radio" name="privacy_radio" value="Private Recipe" id="privacy_private" checked="True">
+        Private Recipe
+    </input>
+
+    <input type="radio" name="privacy_radio" value="Public Recipe" id="privacy_public"> 
+        Public Recipe
+    </input>
+
+    <br>
+
+    <div class = "add_recipe">
+        <input type="submit" name="add_recipe" class="save_recipe_submit" value="Save Recipe" >
+    </div>
+
+
+</form>
+
+
+<!-- JS -->
+<script src="/static/js/add-ing.js"> </script>
+<script src="/static/js/add-inst.js"> </script>
+<script src="/static/js/save-recipe.js"> </script>
+
+
+{% endblock %}

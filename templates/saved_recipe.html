@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ recipe.recipe_name }}
+{% endblock %}
+
+{%block body %}
+
+    {% include "navbar.html" %}
+
+    <br>
+
+    <a href="/login/{{ user.id }}"> Back to profile </a>
+
+    <h1>
+        {{ recipe.recipe_name }}
+    </h1>
+
+    <div id="recipe_author">
+        <h4>
+            Author : {{recipe.user.fname}} {{recipe.user.lname}}
+        </h4>
+    </div>
+
+    <div>
+        <form action="/login/{{ user.id }}/saved_recipe/{{ recipe.id }}/add_to_fav" name="add_to_fav">
+            <input type="submit" name="add_to_fav" id="add_to_fav" value="Add to Favorites">        
+        </form>
+    </div>
+
+
+    <div>
+        <form action="/login/{{ user.id }}/saved_recipe/{{ recipe.id }}/add_to_wish" name="add_to_wish">
+            <input type="submit" name="add_to_wish" id="add_to_wish" value="Add to Wishlist">
+        </form>
+    </div>
+
+
+
+    <div id="recipe_date">
+        <h3> Recipe Date: </h3>
+        {{ recipe.recipe_date }}
+    </div>
+
+
+
+    <div id="recipe_servings">
+        <h3> Servings: </h3>
+        {{ recipe.servings }}
+    </div>
+
+
+
+    <div id="recipe_ingredients">
+        <h3> Ingredients: </h3>
+        <ol>
+            {% for ingredient in recipe.ingredients %}
+                <li>
+                    {{ ingredient.name }} - {{ ingredient.quantity }} {{ ingredient.unit }}
+                </li>
+        {% endfor %}
+        </ol>
+    </div>
+
+
+
+    <div id="recipe_instructions">
+        <h3> Instructions: </h3>
+            <ol>
+                {% for instruction in recipe.instructions %}
+                    <li> {{ instruction.step }} </li>
+                    <br>
+            {% endfor %}
+            </ol>
+    </div>
+
+
+
+    <div id="recipe_notes">
+        <h3> Notes: </h3>
+        {{ recipe.notes }}
+    </div>
+
+    <div id="recipe_privacy">
+        <h3> Privacy: </h3>
+        {{ recipe.privacy }}
+    </div>
+
+    <br>
+    <br>
+
+    {% if recipe.user == user %}
+
+        <form action="/login/{{user.id}}/saved_recipe/{{recipe.id}}/edit_recipe">
+            <input type="submit" id="edit_recipe" name="edit_recipe" value="Edit Recipe"> </button>
+        </form>
+
+    {% endif %}
+
+
+{% endblock %}

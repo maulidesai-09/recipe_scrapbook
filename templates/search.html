@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+
+{% block body %}
+
+    {% include "navbar.html" %}
+
+    <form action="/login/{{user.id}}/search/search_results" id="search_form" name="search_form">
+
+    <h1> Search </h1>
+    <input id="search_input" name="search_input"></input>
+
+    <br>
+
+    <input type="radio" name="search_radio" value="ingredients" id="search_ingredient" checked="True"> 
+        Ingredients
+    </input>
+
+    <input type="radio" name="search_radio" value="recipe_name" id="search_recipe_name">
+        Recipe Name
+    </input>
+
+    <br>
+
+    <input type="radio" name="search_radio_privacy" value="search_public" id="search_public" checked="True"> 
+        Public Recipes
+    </input>
+
+    <input type="radio" name="search_radio_privacy" value="search_private" id="search_private">
+        Private Recipes (My Recipes)
+    </input>
+
+    <br>
+    <br>
+
+    <input type="submit" id="search_submit" name="search_submit" value="Search">
+
+
+    </form>
+
+{% endblock %}
+ 

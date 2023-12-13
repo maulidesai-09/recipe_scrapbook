@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+    {{user.fname}} {{user.lname}} - Homepage
+
+{% endblock %}
+
+{% block body %}
+
+{% include "navbar.html" %}
+
+<h2>
+    Hi {{user.fname}}!!
+</h2>
+
+<br>
+<br>
+
+<ul>
+
+    <li>
+    <div>
+        <a href="/login/{{user.id}}/new_recipe" id="NewRecipe" name="new_recipe"> Add a new recipe </a>
+    </div>
+    </li>
+
+    <li>
+    <div>
+        <a href="/login/{{user.id}}/my_recipes" id="MyRecipes" name="my_recipes"> My Recipes </a>
+    </div>
+    </li>
+
+    <li>
+    <div>
+        <a href="/login/{{user.id}}/all_recipes" id="AllRecipes" name="all_recipes"> All Recipes </a>
+    </div>
+    </li>
+
+    <li>
+    <div>
+        <a href="/login/{{user.id}}/favorite_recipes" id="FavoriteRecipes" name="favorite_recipes"> Favorites </a>
+    </div>
+    </li>
+
+    <li>
+    <div>
+        <a href="/login/{{user.id}}/wishlist_recipes" id="WishlistRecipes" name="wishlist_recipes"> Wishlist </a>
+    </div>
+    </li>
+
+</ul>
+
+
+
+{% endblock %}

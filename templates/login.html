@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Log In/ Sign Up
+{% endblock %}
+
+{%block body %}
+    <h1> Welcome! </h1>
+
+    <br>
+
+    <h2> Log In </h2>
+
+    <form action="/login" method="POST">
+        <div>
+            Email
+            <input type="text" name="email" id="EmailInput">
+        </div>
+
+        <div>
+            Password
+            <input type="password" name="password" id="PasswordInput">
+        </div>
+
+        <br>
+
+        <div>
+            <input type="submit" class="btn btn-success">
+        </div>
+    
+    <br>
+    <br>
+
+    </form>
+
+    <br>
+    <br>
+
+
+
+    <h2> New User Sign Up </h2>
+
+    <form action="/signup" method="POST">
+        <div>
+            First Name
+            <input type="text" name="fname" id="FirstNameInput" required>
+        </div>
+
+        <div>
+            Last Name
+            <input type="text" name="lname" id="LastNameInput" required>
+        </div>
+
+        <div>
+            Email
+            <input type="text" name="email" id="EmailInput" required>
+        </div>
+        
+        <div>
+            Password
+            <input type="password" name="password" id="password" required>
+        </div>
+        
+        <br>
+        
+        <div>
+            <input type="submit" class="btn btn-success">
+        </div>
+
+    </form>
+
+{% endblock %}
+
+
+
+
+

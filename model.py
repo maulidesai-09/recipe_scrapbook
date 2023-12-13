@@ -34,15 +34,18 @@ class Recipe(db.Model):
     __tablename__ = "recipes"
 
     id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    recipe_date = db.Column(db.DateTime, nullable =  False)
+    recipe_date = db.Column(db.Date, nullable =  False)
     recipe_name = db.Column(db.String, nullable = False, unique = True)
     servings = db.Column(db.String)
-    ingredients = db.Column(db.Text, nullable = False)
-    instructions = db.Column(db.Text, nullable = False)
+    # ingredients = db.Column(db.Text, nullable = False)
+    # instructions = db.Column(db.Text, nullable = False)
     notes = db.Column(db.Text)
+    privacy = db.Column(db.String, nullable =  False)
     images = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
+    ingredients = db.relationship("Ingredient", back_populates="recipe")
+    instructions = db.relationship("Instruction", back_populates="recipe")
     user = db.relationship("User", back_populates="recipes")
     favorites = db.relationship("User_Favorite", back_populates="recipe")
     wishlist = db.relationship("User_Wishlist", back_populates="recipe")
@@ -51,7 +54,35 @@ class Recipe(db.Model):
         """ Show info about a recipe """
 
         return f'<recipe_id = {self.id}, recipe_name = {self.recipe_name}, user_id = {self.user_id}>'
-    
+
+
+
+class Ingredient(db.Model):
+    """ Details of recipe ingredients """
+
+    __tablename__ = "ingredients"
+
+    id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    name = db.Column(db.String, nullable = False)
+    quantity = db.Column(db.String)
+    unit = db.Column(db.String)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipes.id"))
+
+    recipe = db.relationship("Recipe", back_populates="ingredients")
+
+
+
+class Instruction(db.Model):
+    """ Details of recipe instructions """
+
+    __tablename__ = "instructions"
+
+    id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    step = db.Column(db.Text)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipes.id"))
+
+    recipe = db.relationship("Recipe", back_populates="instructions")
+
 
 
 class User_Favorite(db.Model):

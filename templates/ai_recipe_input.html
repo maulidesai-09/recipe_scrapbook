@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+    {{user.fname}} {{user.lname}} - AI Recipe Inputs
+
+{% endblock %}
+
+{% block body %}
+
+{% include "navbar.html" %}
+
+<h2> Generate Recipe Using AI </h2>
+<h4> (Generates recipe using ingredients entered below) </h4>
+
+<br> 
+
+<form action="/login/{{user.id}}/ai_recipe_input/ai_recipe_result" id="search_form" name="search_form">
+
+    <div>
+        <h3> Enter ingredients:</h3>
+        <input id="ai_ingredients" name="ai_ingredients"></input>
+    </div>
+
+    <br>
+
+    <input type="submit" id="ai_recipe_generate" name="ai_recipe_generate" value="Generate Recipe">
+
+</form>
+
+{% endblock %}
+
+

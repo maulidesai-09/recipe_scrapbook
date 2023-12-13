@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Search Results
+{% endblock %}
+
+
+{% block body %}
+
+    {% include "navbar.html" %}
+
+    <form action="/login/{{user.id}}/search/search_results" id="search_form" name="search_form">
+
+    <h1> Search Results </h1>
+
+    <h3> for {{search_type_name}} - {{search_input}} </h3>
+    <h5> Search Privacy: {{search_privacy}} </h5>
+
+    <br>
+    
+    {% if "Private" in search_privacy %}
+        <ul>
+            {% for recipe in result_recipes_by_user %}
+            <li> 
+                <a href="/login/{{user.id}}/saved_recipe/{{recipe.id}}">
+                    {{recipe.recipe_name}} 
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    
+        {% else %}
+
+        <h4> My Recipes </h4>
+        <ul>
+            {% for recipe in result_recipes_by_user %}
+            <li> 
+                <a href="/login/{{user.id}}/saved_recipe/{{recipe.id}}">
+                    {{recipe.recipe_name}} 
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+
+
+        <h4> Public Recipes by Other Users </h4>
+        <ul>
+            {% for recipe in result_recipes_public %}
+            <li> 
+                <a href="/login/{{user.id}}/saved_recipe/{{recipe.id}}">
+                    {{recipe.recipe_name}} 
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}
+
+
+    

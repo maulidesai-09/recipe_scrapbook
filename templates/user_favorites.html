@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Favorites
+{% endblock %}
+
+
+{% block body %}
+
+    {% include "navbar.html" %}
+
+    <a href="/login/{{ user.id }}"> Back to profile </a>
+
+    <ul id="user_favorites">
+        {% for recipe in user_favorite_recipes %}
+        <li>
+            <div>
+                <a href="/login/{{ user.id }}/saved_recipe/{{ recipe.id }}">{{ recipe.recipe_name }}</a>
+            </div>
+            <div>
+                <form action="/login/{{ user.id }}/saved_recipe/{{ recipe.id }}/remove_fav" name="remove_fav">
+                    <input type="submit" id="remove_fav" value="Remove">
+                </form>
+            </div>
+        </li>
+        <br>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

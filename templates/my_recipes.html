@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    My Recipes
+{% endblock %}
+
+
+{% block body %}
+
+    {% include "navbar.html" %}
+
+<h1> My Recipes </h1>
+
+<div class="user_id_del_recipe" hidden>{{user.id}}</div>
+
+<ul>
+    {% for recipe in my_recipes %}
+    <li>
+        <div>
+            <a href="/login/{{user.id}}/saved_recipe/{{recipe.id}}" id="recipe_{{recipe.id}}" name="recipe_{{recipe.id}}"> 
+            {{ recipe.recipe_name }} 
+            </a>
+        </div>
+            
+        <div class="recipe_id_del_recipe" hidden>{{recipe.id}}</div>
+
+        <div>
+            <form action="/login/{{user.id}}/{{recipe.id}}/delete_recipe" name="delete_recipe">
+                <input type="submit" class="delete_recipe" value="Delete Recipe" data-recipe-id="{{recipe.id}}">
+            </form>
+        </div>
+    </li>
+    <br>
+    {% endfor %}
+</ul>
+
+
+<!-- JS -->
+<script src="/static/js/delete-recipe.js"></script>
+
+
+{% endblock %}
+
+
+
+

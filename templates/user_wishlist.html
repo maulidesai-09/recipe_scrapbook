@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Wishlist
+{% endblock %}
+
+
+{% block body %}
+
+    {% include "navbar.html" %}
+
+    <a href="/login/{{ user.id }}"> Back to profile </a>
+
+    <ul id="user_wishlist">
+        {% for recipe in user_wishlist_recipes %}
+        <li>
+            <div>
+                <a href="/login/{{ user.id }}/saved_recipe/{{ recipe.id }}">{{ recipe.recipe_name }}</a>
+            </div>
+            <div>
+                <form action="/login/{{ user.id }}/saved_recipe/{{ recipe.id }}/remove_wish" name="remove_wish">
+                    <input type="submit" id="remove_wish" value="Remove">
+                </form>
+            </div>
+        </li>
+        <br>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

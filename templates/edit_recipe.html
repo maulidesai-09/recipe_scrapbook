@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Edit Recipe
+{% endblock %}
+
+
+{% block body %}
+
+    {% include "navbar.html" %}
+
+<form action="/login/{{user.id}}/saved_recipe/{{recipe.id}}/save_edited_recipe" method="POST">
+
+    <div id="user_id" hidden>{{user.id}}</div>
+    <div id="recipe_id" hidden>{{recipe.id}}</div>
+
+    <h1> Edit Recipe </h1>
+
+    <div name="recipe_author" id="recipe_author">
+        <h4>
+            Author : {{recipe.user.fname}} {{recipe.user.lname}}
+        </h4>
+    </div>
+
+    <div>
+        <h4> Recipe Date </h4>
+        <input type="date" name="recipe_date" id="recipe_date" value="{{ recipe.recipe_date }}">
+        <h4> Recipe Name </h4>
+        <input type="text" name="recipe_name" id="recipe_name" value="{{ recipe.recipe_name }}" required>
+    </div>
+
+    <br>
+
+    <div>
+        <h4> Servings </h4>
+        <input type="text" name="servings" id="servings" value="{{ recipe.servings }}">
+    </div>
+
+    <br>
+
+    <div class="ingredient_details">
+        <h4> Ingredients </h4>
+        {% for ingredient in recipe.ingredients %}
+        <div class="ingredient_individual">
+                Ingredient Name
+                <input type="text" name="ingredient_name" class="ingredient_name" value="{{ ingredient.name }}">
+                Quantity
+                <input type="text" name="ingredient_quantity" class="ingredient_quantity" value="{{ ingredient.quantity }}">
+                Units
+                <select  name="ingredient_unit" class="ingredient_unit" value="{{ ingredient.unit }}">
+                    <option value="cup(s)"> cup </option>
+                    <option value="grams"> gram </option>
+                    <option value="ml"> ml </option>
+                    <option value="liter"> liter </option>
+                    <option value="oz"> oz </option>
+                    <option value="teaspoon"> teaspoon </option>
+                    <option value="tablespoon"> tablespoon </option>
+                    <option value="number"> number </option>
+                </select>
+        </div>
+        {% endfor %}
+        <button class="add_ingredient"> Add New </button>
+    </div>
+
+    <br>
+
+    <div class="instruction_details">
+        <h4> Instructions </h4>
+        {% for instruction in recipe.instructions %}
+        <div class="instruction_individual">
+                <textarea name="instructions" class="instruction_description" 
+                wrap="hard" style="width: 640px; height: 18px;">{{ instruction.step }}</textarea>
+        </div>
+        {% endfor %}
+        <button class="add_instruction"> Add New </button>
+
+    </div>
+
+    <br>
+
+    <div>
+        <h4> Notes </h4>
+            <textarea name="notes" id="notes" wrap="hard" 
+            style="width: 500px; height: 200px;">{{ recipe.notes }}</textarea>
+    </div>
+
+    <br>
+
+    {% if "Private" in recipe.privacy %}
+
+        <input type="radio" name="privacy_radio" value="Private Recipe" id="privacy_private" checked="True">
+            Private Recipe
+        </input>
+
+        <input type="radio" name="privacy_radio" value="Public Recipe" id="privacy_public"> 
+            Public Recipe
+        </input>
+
+        {% else %}
+
+        <input type="radio" name="privacy_radio" value="Private Recipe" id="privacy_private">
+            Private Recipe
+        </input>
+
+        <input type="radio" name="privacy_radio" value="Public Recipe" id="privacy_public" checked="True"> 
+            Public Recipe
+        </input>
+
+    {% endif %}
+
+
+    <div class = "add_recipe">
+        <input type="submit" name="add_recipe" class="save_recipe_submit" value="Save Recipe">
+    </div>
+
+
+</form>
+
+
+<!-- JS -->
+<script src="/static/js/add-ing.js"> </script>
+<script src="/static/js/add-inst.js"> </script>
+<script src="/static/js/save-recipe.js"> </script>
+
+
+{% endblock %}
