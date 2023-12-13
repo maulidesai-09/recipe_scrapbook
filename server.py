@@ -16,10 +16,7 @@ app.jinja_env.undefined = StrictUndefined
 
 load_dotenv()
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-# client = OpenAI()
-# equivalent to: API_KEY = os.environ['OPENAI_API_KEY'] - done in Parks project
 
-# client = OpenAI(api_key="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")
 
 @app.route("/")
 def homepage():
